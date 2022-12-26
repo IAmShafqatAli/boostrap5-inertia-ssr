@@ -20,6 +20,10 @@
             <jet-nav-link :href="route('dashboard')" :active="route().current('dashboard')">
               Dashboard
             </jet-nav-link>
+
+              <jet-nav-link :href="route('contract.index')" :active="route().current('contract.index')">
+              Contract
+            </jet-nav-link>
           </ul>
 
           <!-- Right Side Of Navbar -->
