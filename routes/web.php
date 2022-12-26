@@ -35,6 +35,3 @@ Route::middleware([
     })->name('dashboard');
 });
 
-Route::group(['prefix'=>'contract'], function() {
-    Route::get('/', [ContractController::class,'index'])->name('contract.index');
-});
