@@ -20,10 +20,6 @@
             <jet-nav-link :href="route('dashboard')" :active="route().current('dashboard')">
               Dashboard
             </jet-nav-link>
-
-              <jet-nav-link :href="route('contract.index')" :active="route().current('contract.index')">
-              Contract
-            </jet-nav-link>
           </ul>
 
           <!-- Right Side Of Navbar -->
@@ -65,7 +61,7 @@
                     <form @submit.prevent="switchToTeam(team)">
                       <jet-dropdown-link as="button">
                         <div class="d-flex">
-                          <svg v-if="team.id == $page.props.user.current_team_id" class="me-1 text-success" width="20" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" stroke="currentColor" viewBox="0 0 24 24">
+                          <svg v-if="team.id === $page.props.user.current_team_id" class="me-1 text-success" width="20" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" stroke="currentColor" viewBox="0 0 24 24">
                             <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
                           </svg>
                           <span class="text-truncate" style="width: 12rem;">{{ team.name }}</span>

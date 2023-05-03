@@ -1,6 +1,5 @@
 <?php
 
-use App\Http\Controllers\Contract\ContractController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -35,7 +34,4 @@ Route::middleware([
     })->name('dashboard');
 });
 
-Route::group(['prefix'=>'contract'], function() {
-    Route::get('/', [ContractController::class,'index'])->name('contract.index');
-});
 
