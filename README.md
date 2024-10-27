@@ -1,9 +1,9 @@
 
-## Laravel 10 + Inertia SSR with JetStream + Bootstrap 5 + vite
+## Laravel 11 + Inertia SSR with JetStream + Bootstrap 5 + vite
 
 Following things are installed and working
 
-- Laravel 10
+- Laravel 11
 - Inertia with SSR
 - Bootstrap 5
 - Vite
