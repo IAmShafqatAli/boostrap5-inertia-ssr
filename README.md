@@ -4,7 +4,7 @@
 Following things are installed and working
 
 - Laravel 11
-- Inertia with SSR
+- Inertia (v2) with SSR
 - Bootstrap 5
 - Vite
 
