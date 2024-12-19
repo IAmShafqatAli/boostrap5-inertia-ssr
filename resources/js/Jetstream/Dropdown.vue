@@ -1,6 +1,6 @@
 <template>
   <li class="nav-item dropdown">
-    <a :id="id" class="nav-link" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+    <a :id="id" class="nav-link" type="button" data-bs-toggle="dropdown" aria-expanded="false">
       <slot name="trigger"></slot>
     </a>
 
@@ -19,6 +19,10 @@
         type: String,
         required: true
       },
+    },
+    created() {
+    console.log('Dropdown created')
+    console.log(this.id)
     }
   })
 </script>
