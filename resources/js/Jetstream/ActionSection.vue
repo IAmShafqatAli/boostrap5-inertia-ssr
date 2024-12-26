@@ -1,5 +1,5 @@
 <template>
-  <div class="row">
+  <div class="row d-flex flex-column">
     <div class="col-md-4">
       <jet-section-title>
         <template #title><slot name="title"></slot></template>
@@ -8,7 +8,7 @@
     </div>
 
     <div class="col-md-8">
-      <div class="card shadow-sm">
+      <div class="">
         <div class="card-body">
           <slot name="content"></slot>
         </div>

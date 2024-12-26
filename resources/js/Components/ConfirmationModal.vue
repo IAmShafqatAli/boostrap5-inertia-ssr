@@ -1,67 +1,59 @@
 <script setup>
-import Modal from './Modal.vue';
+import { defineProps, defineEmits } from 'vue';
 
+// Emitting 'close' event to parent component
 const emit = defineEmits(['close']);
 
+// Define props
 defineProps({
-    show: {
-        type: Boolean,
-        default: false,
-    },
-    maxWidth: {
-        type: String,
-        default: '2xl',
-    },
-    closeable: {
-        type: Boolean,
-        default: true,
-    },
+  show: {
+    type: Boolean,
+    default: false,
+  },
+  maxWidth: {
+    type: String,
+    default: '2xl',
+  },
+  closeable: {
+    type: Boolean,
+    default: true,
+  },
 });
 
+// Method to close the modal
 const close = () => {
-    emit('close');
+  emit('close');
 };
 </script>
 
 <template>
-    <Modal
-        :show="show"
-        :max-width="maxWidth"
-        :closeable="closeable"
-        @close="close"
-    >
-        <div class="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
-            <div class="sm:flex sm:items-start">
-                <div class="mx-auto shrink-0 flex items-center justify-center h-12 w-12 rounded-full bg-red-100 sm:mx-0 sm:h-10 sm:w-10">
-                    <svg
-                        class="h-6 w-6 text-red-600"
-                        stroke="currentColor"
-                        fill="none"
-                        viewBox="0 0 24 24"
-                    >
-                        <path
-                            stroke-linecap="round"
-                            stroke-linejoin="round"
-                            stroke-width="2"
-                            d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"
-                        />
-                    </svg>
-                </div>
-
-                <div class="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left">
-                    <h3 class="text-lg">
-                        <slot name="title" />
-                    </h3>
-
-                    <div class="mt-2">
-                        <slot name="content" />
-                    </div>
-                </div>
-            </div>
+  <div v-if="show" class="modal fade show" tabindex="-1" aria-hidden="true" style="display: block !important;">
+    <!-- Modal Dialog -->
+    <div class="modal-dialog modal-dialog-centered" :class="`modal-${maxWidth}`">
+      <!-- Modal Content -->
+      <div class="modal-content">
+        <!-- Modal Header -->
+        <div class="modal-header">
+          <h5 class="modal-title">
+            <slot name="title" />
+          </h5>
+          <!-- Close Button -->
+          <button v-if="closeable" type="button" class="btn-close" aria-label="Close" @click="close"></button>
         </div>
 
-        <div class="flex flex-row justify-end px-6 py-4 bg-gray-100 text-right">
-            <slot name="footer" />
+        <!-- Modal Body -->
+        <div class="modal-body">
+          <slot name="content" />
         </div>
-    </Modal>
+
+        <!-- Modal Footer -->
+        <div class="modal-footer">
+          <slot name="footer" />
+        </div>
+      </div>
+    </div>
+
+    <!-- Modal Background (Backdrop) -->
+    <div v-if="closeable" class="modal-backdrop fade show" @click="close"></div>
+  </div>
 </template>

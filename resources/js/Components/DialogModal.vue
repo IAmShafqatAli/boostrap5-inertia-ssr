@@ -1,47 +1,69 @@
 <script setup>
-import Modal from './Modal.vue';
+
+const props = defineProps({
+  show: {
+    type: Boolean,
+    default: false,
+  },
+  maxWidth: {
+    type: String,
+    default: '2xl',
+  },
+  closeable: {
+    type: Boolean,
+    default: true,
+  },
+});
 
 const emit = defineEmits(['close']);
 
-defineProps({
-    show: {
-        type: Boolean,
-        default: false,
-    },
-    maxWidth: {
-        type: String,
-        default: '2xl',
-    },
-    closeable: {
-        type: Boolean,
-        default: true,
-    },
-});
-
 const close = () => {
+  if (props.closeable) {
     emit('close');
+  }
 };
 </script>
 
 <template>
-    <Modal
-        :show="show"
-        :max-width="maxWidth"
-        :closeable="closeable"
-        @close="close"
-    >
-        <div class="px-6 py-4">
-            <div class="text-lg">
-                <slot name="title" />
+  <teleport to="body">
+    <transition name="modal-transition">
+      <!-- Root element is a div to avoid the Vue warning -->
+      <div v-if="show" class="modal fade show d-block" tabindex="-1" aria-hidden="true">
+        <!-- Modal Background -->
+        <div class="modal-dialog modal-dialog-centered" :class="maxWidth">
+          <div class="modal-content">
+            <!-- Modal Header -->
+            <div class="modal-header">
+              <div class="d-flex">
+                <div class="p-1 w-100">
+                  <slot name="title" />
+                </div>
+                <div class="p-1 flex-shrink-1">
+                  <button
+                    v-if="props.closeable"
+                    type="button"
+                    class="btn-close"
+                    data-bs-dismiss="modal"
+                    aria-label="Close"
+                    @click="close"
+                  ></button>
+                </div>
+                </div>
+
             </div>
 
-            <div class="mt-4">
-                <slot name="content" />
+            <!-- Modal Body -->
+            <div class="modal-body">
+              <slot name="content" />
             </div>
-        </div>
 
-        <div class="flex flex-row justify-end px-6 py-4 bg-gray-100 text-right">
-            <slot name="footer" />
+            <!-- Modal Footer -->
+            <div class="modal-footer">
+              <slot name="footer" />
+            </div>
+          </div>
         </div>
-    </Modal>
+      </div>
+    </transition>
+  </teleport>
 </template>
